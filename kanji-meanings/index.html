@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="main"></div>
+    <script src="../kanji-n3.js" charset="UTF-8"></script>
+    <script>
+      function createObj(tag, className, text) {
+        const obj = document.createElement(tag);
+        obj.setAttribute("class", className);
+        obj.innerText = text;
+        return obj;
+      }
+
+      kanjis.sort(([kanji1, desc1], [kanji2, desc2]) => {
+        return (
+          desc1.meanings.length +
+          desc1.readings_kun.length +
+          desc1.readings_on.length -
+          (desc2.meanings.length +
+            desc2.readings_kun.length +
+            desc2.readings_on.length)
+        );
+      });
+      kanjis.forEach(([kanji, desc]) => {
+        const main = document.getElementById("main");
+        const cell = document.createElement("div");
+
+        const kanjiName = createObj("div", "kanji", kanji);
+
+        const kanjiData = createObj("div", "readings", "");
+        const meanings = createObj("div", "meanings", desc.meanings.join(", "));
+        const kunReading = createObj(
+          "div",
+          "kun",
+          "Kun: " + desc.readings_kun.join(" ")
+        );
+        const onReading = createObj(
+          "div",
+          "on",
+          "On: " + desc.readings_on.join(" ")
+        );
+
+        cell.appendChild(kanjiName);
+        kanjiData.appendChild(meanings);
+        kanjiData.appendChild(kunReading);
+        kanjiData.appendChild(onReading);
+        cell.appendChild(kanjiData);
+
+        main.appendChild(cell);
+      });
+    </script>
+  </body>
+</html>

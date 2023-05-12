@@ -1,0 +1,33 @@
+/* enbaling background printing */
+body {
+  -webkit-print-color-adjust: exact !important;
+
+  font-size: 25px;
+}
+
+#main {
+  text-align: center;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto;
+  grid-gap: 3px;
+  background-color: black;
+  border: black 3px solid;
+}
+
+#main > div {
+  /* display: inline-grid; */
+  background-color: white;
+  /* aspect-ratio: 1; */
+  page-break-before: avoid;
+  page-break-after: always;
+  page-break-inside: avoid;
+}
+
+.kanji {
+  font-size: 70px;
+}
+
+.readings {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
